@@ -32,11 +32,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownD" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Docteurs
+                        Médecins
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/admin/doctors/formDoctors}">Nouveau Docteur</a></li>
-                        <li><a class="dropdown-item" th:href="@{/user/index/doctors}">Chercher Docteur</a></li>
+                        <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/admin/doctors/formDoctors}">Nouveau Médecin</a></li>
+                        <li><a class="dropdown-item" th:href="@{/user/index/doctors}">Chercher Médecin</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -55,7 +55,7 @@
                         <i class="fas fa-user"></i>  <span sec:authentication="name"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" th:href="@{/logout}">Logout<span class="badge"><i class="fas fa-power-off text-dark"></i></span></a></li>
+                        <li><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-power-off text-dark"></i> Logout</a></li>
                     </ul>
                 <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link" th:href="@{/login}">Login</a>
@@ -101,19 +101,19 @@
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">
-                        Products
+                        Entités
                     </h6>
                     <p>
-                        <a href="#!" class="text-reset">Angular</a>
+                        <a th:href="@{/user/index/patients}" class="text-reset">Patients</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-reset">React</a>
+                        <a th:href="@{/user/index/doctors}" class="text-reset">Médecins</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-reset">Vue</a>
+                        <a th:href="@{/user/index/patients}" class="text-reset">Rendez-vous</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-reset">Laravel</a>
+                        <a th:href="@{/user/index/patients}" class="text-reset">Consultation</a>
                     </p>
                 </div>
                 <!-- Grid column -->

@@ -3,35 +3,35 @@
 layout:decorate="maintemplate">
 <head>
     <meta charset="UTF-8">
-    <title>Liste des docteurs</title>
+    <title>Liste des médecins</title>
 </head>
 <body>
 <div layout:fragment="content1">
 <div class="container mt-2">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a th:href="@{/}">Acceuil</a></li>
-        <li class="breadcrumb-item active">Liste des docteurs</li>
+        <li class="breadcrumb-item active">Liste des médecins</li>
     </ol>
 <div class="card">
     <div class="card-header">
-        <h3>Liste des docteurs</h3>
+        <h3>Liste des médecins</h3>
     </div>
     <div class="card-body">
 
         <div class="d-flex align-items-center ">
             <form method="get" th:action="@{/user/index/doctors}" class="mt-auto d-flex align-items-center me-auto justify-content-around">
                 <label>Rechercher par </label>
-                <input type="text" placeholder="Nom du docteur" name="keyword" th:value="${keyword}">
-                <input type="text" placeholder="Spécialité du docteur" name="specialty" th:value="${specialty}">
+                <input type="text" placeholder="Nom du médecin" name="keyword" th:value="${keyword}">
+                <input type="text" placeholder="Spécialité du médecin" name="specialty" th:value="${specialty}">
                 <button type="submit" class="btn btn-primary">Chercher <i class="fas fa-search"></i></button>
             </form>
             <form method="get" th:action="@{/admin/doctors/formDoctors}" class="mt-auto d-flex justify-content-end">
-                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>Nouveau Docteur</button>
+                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>Nouveau Médecin</button>
             </form>
         </div>
         <table class="table">
             <thead>
-            <tr><th>IdDoctor</th><th>Nom</th><th>Spécialité</th><th>Ville</th><th>Téléphone</th><th sec:authorize="hasAuthority('ADMIN')">Supprimer</th><th sec:authorize="hasAuthority('ADMIN')">Modifier</th></tr>
+            <tr><th>IdMédecin</th><th>Nom</th><th>Spécialité</th><th>Ville</th><th>Téléphone</th><th sec:authorize="hasAuthority('ADMIN')">Supprimer</th><th sec:authorize="hasAuthority('ADMIN')">Modifier</th></tr>
             </thead>
             <tbody>
             <tr th:each="p:${listDoctors}">
