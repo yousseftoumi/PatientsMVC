@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+layout:decorate="maintemplate">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des patients</title>
+</head>
+<body>
+<div layout:fragment="content1">
+<div class="container mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Acceuil</a></li>
+        <li class="breadcrumb-item active">Liste des patients</li>
+    </ol>
+<div class="card">
+    <div class="card-header">
+        <h3>Liste des patients</h3>
+    </div>
+    <div class="card-body">
+        <div class="d-flex align-items-center ">
+        <form method="get" th:action="@{/user/index/patients}" class="mt-auto d-flex align-items-center me-auto justify-content-around">
+            <label class="mt-2">Rechercher par </label>
+            <input type="text" placeholder="Nom du patient" name="keyword" th:value="${keyword}">
+            <input type="number" name="score" th:value="${score}">
+            <input type="text" placeholder="Sexe du patient" name="sexe" th:value="${sexe}">
+            <!--<select th:field="*{sexe}">
+                <option value="'M'" th:text="Male"></option>
+                <option value="'F'" th:text="Femelle"></option>
+            </select>-->
+            <button type="submit" class="btn btn-primary">Chercher <i class="fas fa-search"></i></button>
+        </form>
+        <form method="get" th:action="@{/admin/patients/formPatients}" class="mt-auto d-flex justify-content-end">
+            <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau Patient</button>
+        </form>
+        </div>
+        <table class="table">
+            <thead>
+            <tr><th>IdPatient</th><th>Nom</th><th>Sexe</th><th>Date de naissance</th><th>Malade</th><th>Score</th><th>Supprimer</th><th>Modifier</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="p:${listPatients}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.nom}"></td>
+                <td>
+                    <span th:if="${p.sexe == 'F'}">Femelle</span>
+                    <span th:unless="${p.sexe == 'F'}">Male</span>
+                </td>
+                <td th:text="${p.datenaissance}"></td>
+                <td th:text="${p.malade} ? 'OUI' : 'NON'"></td>
+                <td th:text="${p.score}"></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a class="btn btn-danger"
+                       th:href="@{/admin/patients/delete(id=${p.id},keyword=${keyword},sexe=${sexe},score=${score},page=${currentPage})}"
+                    onclick="return confirm('Are you sure you want to delete ?')">Delete <i class="fas fa-trash-alt"></i></a></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a  class="btn btn-warning"
+                       th:href="@{/admin/patients/editPatient(id=${p.id},keyword=${keyword},sexe=${sexe},score=${score},page=${currentPage})}">Edit <i class="fas fa-edit"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="nav nav-pills justify-content-center">
+            <li th:each="page,status:${pages}">
+                <a th:class="${status.index==currentPage?'btn btn-primary':'btn btn-outline-primary'}"
+                   class="ms-2 " th:text="${status.index}" th:href="@{/user/index/patients(page=${status.index},keyword=${keyword},sexe=${sexe},score=${score})}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>
