@@ -31,7 +31,7 @@ layout:decorate="maintemplate">
         </div>
         <table class="table">
             <thead>
-            <tr><th>IdDoctor</th><th>Nom</th><th>Spécialité</th><th>Ville</th><th>Téléphone</th></tr>
+            <tr><th>IdDoctor</th><th>Nom</th><th>Spécialité</th><th>Ville</th><th>Téléphone</th><th sec:authorize="hasAuthority('ADMIN')">Supprimer</th><th sec:authorize="hasAuthority('ADMIN')">Modifier</th></tr>
             </thead>
             <tbody>
             <tr th:each="p:${listDoctors}">
