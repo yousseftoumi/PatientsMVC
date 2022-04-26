@@ -25,7 +25,7 @@ layout:decorate="maintemplate">
                 <input type="text" placeholder="Spécialité du médecin" name="specialty" th:value="${specialty}">
                 <button type="submit" class="btn btn-primary">Chercher <i class="fas fa-search"></i></button>
             </form>
-            <form method="get" th:action="@{/admin/doctors/formDoctors}" class="mt-auto d-flex justify-content-end">
+            <form method="get" th:action="@{/admin/doctors/formDoctors}" class="mt-auto d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
                 <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i>Nouveau Médecin</button>
             </form>
         </div>

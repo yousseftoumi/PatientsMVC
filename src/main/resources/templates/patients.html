@@ -29,7 +29,7 @@ layout:decorate="maintemplate">
             </select>-->
             <button type="submit" class="btn btn-primary">Chercher <i class="fas fa-search"></i></button>
         </form>
-        <form method="get" th:action="@{/admin/patients/formPatients}" class="mt-auto d-flex justify-content-end">
+        <form method="get" th:action="@{/admin/patients/formPatients}" class="mt-auto d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
             <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Nouveau Patient</button>
         </form>
         </div>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="maintemplate">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Rendez-vous</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3 col- gap-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/}">Acceuil</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/user/index/appointments}">Liste des Rendez-vous</a></li>
+            <li class="breadcrumb-item active">Modifier Rendez-vous</li>
+        </ol>
+        <form th:action="@{/admin/appointments/save(date=${date},page=${page})}" method="post">
+            <div class="mt-3 mb-3 align-items-center">
+                <label for="nom">Rendez-vous pour </label>
+                <input id="nom" type="text" class="form-control" name="nom" th:value="${appointment.nom}">
+                <span class="form-text text-dark" th:errors="${appointment.nom}"> </span>
+            </div>
+            <div class="mt-3 mb-3 align-items-center">
+                <label for="cin">CIN</label>
+                <input id="cin" type="text" class="form-control" name="cin" th:value="${appointment.cin}">
+                <span class="form-text text-dark" th:errors="${appointment.cin}"> </span>
+            </div>
+            <div class="mt-3 mb-3 align-items-center">
+                <label for="age">Age</label>
+                <input id="age" type="number" class="form-control" name="age" th:value="${appointment.age}">
+                <span class="form-text text-dark" th:errors="${appointment.age}"> </span>
+            </div>
+            <div class="mt-3 mb-3 align-item-center">
+                <label for="specialty">Spécialité du médecin souhaité</label>
+                <input id="specialty" type="text" class="form-control" name="specialty" th:value="${appointment.specialty}">
+                <span class="form-text text-dark" th:errors="${appointment.specialty}"> </span>
+            </div>
+            <div class="mt-3 mb-3 align-items-center">
+                <label for="rdv">Date de rendez-vous</label>
+                <input id="rdv" type="date" class="form-control" name="daterdv" th:value="${appointment.daterdv}">
+                <span class="form-text text-dark" th:errors="${appointment.daterdv}"> </span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save <i class="fas fa-save"></i></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -67,10 +67,14 @@ public class PatientController {
     }
 
     @PostMapping(path = "/admin/patients/save")
-    public String save(Model model, @Valid Patient patient, BindingResult bindingResult){
+    public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
+                       @RequestParam(defaultValue = "") String keyword,
+                       @RequestParam(defaultValue = "") String sexe,
+                       @RequestParam(defaultValue = "0") int score,
+                       @RequestParam(defaultValue = "0") int page){
         if(bindingResult.hasErrors()) return "formPatients";
         patientRepository.save(patient);
-        return "redirect:/user/index/patients";
+        return "redirect:/user/index/patients?keyword="+keyword+"&sexe="+sexe+"&score="+score+"&page="+page;
     }
     @PostMapping(path = "/admin/patients/saveEdited")
     public String saveEdited(@Valid Patient patient, BindingResult bindingResult,

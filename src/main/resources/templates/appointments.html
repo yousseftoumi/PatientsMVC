@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+layout:decorate="maintemplate">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des rendez-vous</title>
+</head>
+<body>
+<div layout:fragment="content1">
+<div class="container mt-2">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/}">Acceuil</a></li>
+        <li class="breadcrumb-item active">Liste des rendez-vous</li>
+    </ol>
+<div class="card">
+    <div class="card-header">
+        <h3>Liste des rendez-vous</h3>
+    </div>
+    <div class="card-body">
+
+        <div class="d-flex align-items-center ">
+            <form method="get" th:action="@{/user/index/appointments}" class="mt-auto d-flex align-items-center me-auto justify-content-around">
+                <label>Rechercher par </label>
+                <input type="date" name="date" th:value="${date}">
+                <button type="submit" class="btn btn-primary">Chercher <i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <table class="table">
+            <thead>
+            <tr><th>IdRDV</th><th>Concerné</th><th>CIN</th><th>Age</th><th>Spécialité souhaitée</th><th>Date du RDV</th><th sec:authorize="hasAuthority('ADMIN')">Supprimer</th><th sec:authorize="hasAuthority('ADMIN')">Modifier</th></tr>
+            </thead>
+            <tbody>
+            <tr th:each="a:${listAppointments}">
+                <td th:text="${a.id}"></td>
+                <td th:text="${a.nom}"></td>
+                <td th:text="${a.cin}"></td>
+                <td th:text="${a.age}"></td>
+                <td th:text="${a.specialty}"></td>
+                <td th:text="${a.daterdv}"></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a class="btn btn-danger"
+                       th:href="@{/admin/appointments/delete(id=${a.id},date=${date},page=${currentPage})}"
+                    onclick="return confirm('Are you sure you want to delete ?')">Delete <i class="fas fa-trash-alt"></i></a></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a  class="btn btn-warning"
+                       th:href="@{/admin/appointments/editAppointment(id=${a.id},date=${date},page=${currentPage})}">Edit <i class="fas fa-edit"></i></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="nav nav-pills justify-content-center">
+            <li th:each="page,status:${pages}">
+                <a th:class="${status.index==currentPage?'btn btn-primary':'btn btn-outline-primary'}"
+                   class="ms-2 " th:text="${status.index}" th:href="@{/user/index/appointments(page=${status.index},date=${date})}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>

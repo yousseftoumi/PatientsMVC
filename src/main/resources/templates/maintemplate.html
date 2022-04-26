@@ -26,8 +26,6 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/admin/patients/formPatients}">Nouveau Patient</a></li>
                         <li><a class="dropdown-item" th:href="@{/user/index/patients}">Chercher Patient</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -44,8 +42,17 @@
                         Services
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item">Rendez-vous</a></li>
+                        <li><a class="dropdown-item" th:href="@{/user/appointments/newAppointment}">Rendez-vous</a></li>
                         <li><a class="dropdown-item" >Consultation</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="gereServices" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Gérer Services
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/user/index/appointments}">Gérer Rendez-vous</a></li>
+                        <li><a class="dropdown-item" >Gérer Consultations</a></li>
                     </ul>
                 </li>
             </ul>
@@ -110,7 +117,7 @@
                         <a th:href="@{/user/index/doctors}" class="text-reset">Médecins</a>
                     </p>
                     <p>
-                        <a th:href="@{/user/index/patients}" class="text-reset">Rendez-vous</a>
+                        <a th:href="@{/user/appointments/newAppointement}" class="text-reset">Rendez-vous</a>
                     </p>
                     <p>
                         <a th:href="@{/user/index/patients}" class="text-reset">Consultation</a>
